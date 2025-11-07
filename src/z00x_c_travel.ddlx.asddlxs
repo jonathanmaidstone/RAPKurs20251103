@@ -1,0 +1,9 @@
+@Metadata.layer: #CUSTOMER
+annotate entity Z00_C_Travel with
+{
+  @Consumption.valueHelpDefinition: [{ entity: { name: 'Z00X_I_CUSTOMER_VH',
+  element: 'CustomerID' }
+   }]
+  CustomerId;
+
+}

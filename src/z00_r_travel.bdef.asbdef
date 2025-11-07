@@ -1,0 +1,139 @@
+managed implementation in class zbp_00_r_travel unique;
+strict ( 2 );
+with draft;
+extensible {
+with additional save;
+with determinations on modify;
+with determinations on save;
+with validations on save;
+}
+define behavior for Z00_R_TRAVEL alias Travel
+persistent table z00_travel ##unmapped_field
+with additional save
+draft table z00_traveld
+lock master
+total etag ChangedAt // last change to active data
+authorization master ( instance )
+etag master LocChangedAt // last change to draft
+early numbering
+extensible
+{
+  create ( authorization : global );
+  update ( features : instance );
+  delete;
+
+event travelCreated parameter z00_a_event;
+
+  field ( readonly ) AgencyId, TravelId;
+  field ( readonly ) Status, changedAt, changedBy, Duration;
+
+  field ( features : instance ) BeginDate, EndDate;
+
+  determine action checkCustomer
+  {
+    validation validateCustomer;
+  }
+
+  draft action Edit;
+  draft action Resume;
+  draft action Discard;
+
+  draft determine action Prepare extensible
+  {
+    validation validateBeginDate;
+    validation validateEndDate;
+    validation validateDateRange;
+    validation validateCustomer;
+    determination determineStatus;
+    validation Item~validateItemDate;
+
+  }
+
+  draft action Activate optimized;
+
+
+  validation validateBeginDate on save { create; field BeginDate; }
+  validation validateEndDate on save { create; field EndDate; }
+  validation validateDateRange on save { create; field BeginDate, EndDate; }
+  validation validateCustomer on save { create; field CustomerId; }
+
+  determination determineStatus on save { create; }
+  determination determineDuration on save { create; field BeginDate, EndDate; }
+
+  determine action adjustDuration
+  {
+    validation validateBeginDate;
+    validation validateEndDate;
+    validation validateDateRange;
+    determination determineDuration;
+  }
+
+  side effects { determine action adjustDuration
+  executed on field BeginDate, field EndDate
+  affects field Duration, messages; }
+
+
+
+  static action ( authorization : global ) issueMessage;
+  action ( features : instance ) cancelTravel;
+  action ( features : instance ) approveTravel;
+
+
+association _Item { create; with draft; }
+
+  mapping for z00_travel corresponding ##unextensible_mapping
+    {
+
+      // links CDS, rechts DB
+      AgencyId     = agency_id;
+      travelID     = travel_id;
+      //Description = description;
+      CustomerId   = customer_id;
+      BeginDate    = begin_date;
+      Enddate      = end_date;
+      ChangedAt    = changed_at;
+      ChangedBy    = changed_by;
+      LocChangedAt = loc_changed_at;
+    }
+}
+
+define behavior for Z00_R_Travelitem alias Item
+with unmanaged save
+//persistent table z00_tritem
+draft table z00_tritemd
+lock dependent by _Travel
+authorization dependent by _Travel
+etag master LocChangedAt
+extensible
+{
+
+
+update;
+delete;
+
+field (numbering:managed, readonly ) ItemUuid;
+field (readonly) AgencyId, TravelId;
+
+validation validateItemDate on save { create; field FlightDate; }
+
+association _Travel { with draft; }
+
+mapping for /lrn/437_s_tritem
+control /lrn/437_s_tritemx
+ corresponding ##unextensible_mapping
+ {
+      ItemUuid           = item_uuid;
+      AgencyId           = agency_id;
+      TravelId           = travel_id;
+      CarrierId          = carrier_id;
+      ConnectionId       = connection_id;
+      FlightDate         = flight_date;
+      BookingId          = booking_id;
+      PassengerFirstName = passenger_first_name;
+      PassengerLastName  = passenger_last_name;
+      ChangedAt          = changed_at;
+      ChangedBy          = changed_by;
+      LocChangedAt       = loc_changed_at;
+    }
+
+}

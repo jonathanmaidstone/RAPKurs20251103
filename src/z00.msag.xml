@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_MSAG" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <T100A>
+    <ARBGB>Z00</ARBGB>
+    <MASTERLANG>E</MASTERLANG>
+    <STEXT>Messages</STEXT>
+   </T100A>
+   <T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>Z00</ARBGB>
+     <MSGNR>001</MSGNR>
+     <TEXT>This is a message</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>Z00</ARBGB>
+     <MSGNR>002</MSGNR>
+     <TEXT>Trip already cancelled</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>Z00</ARBGB>
+     <MSGNR>003</MSGNR>
+     <TEXT>Cannot cancel a trip that has already started (or is already finished)</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>Z00</ARBGB>
+     <MSGNR>004</MSGNR>
+     <TEXT>Trip approved</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>Z00</ARBGB>
+     <MSGNR>005</MSGNR>
+     <TEXT>Cannot approve a trip that is already finished</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>Z00</ARBGB>
+     <MSGNR>006</MSGNR>
+     <TEXT>Beginning of trip must not be in the past</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>Z00</ARBGB>
+     <MSGNR>007</MSGNR>
+     <TEXT>End of trip must not be in the past</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>Z00</ARBGB>
+     <MSGNR>008</MSGNR>
+     <TEXT>End of trip must not be before the beginning</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>Z00</ARBGB>
+     <MSGNR>009</MSGNR>
+     <TEXT>Duration updated</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>Z00</ARBGB>
+     <MSGNR>010</MSGNR>
+     <TEXT>Customer does not exist</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>Z00</ARBGB>
+     <MSGNR>011</MSGNR>
+     <TEXT>Flight &amp;1 &amp;2 is outside the dates of the trip</TEXT>
+    </T100>
+   </T100>
+  </asx:values>
+ </asx:abap>
+</abapGit>
